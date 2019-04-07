@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Stopwatch } from './stopwatch';
 
 @Component({
   selector: 'tt-root',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  
+  stopwatch: Stopwatch = new Stopwatch();
+
 
 }

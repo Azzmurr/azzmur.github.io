@@ -1,8 +1,24 @@
 import { StopwatchLap } from './stopwatch-lap';
+import { Observable } from 'rxjs';
 
 export class Stopwatch {
     laps: StopwatchLap[] = [];
     activeLap: StopwatchLap;
+
+    private pastTime: string;
+    private timeObserver = observer => {
+        const interval = setInterval(() => {
+            const formatedTime = this.formated;
+            if (this.pastTime !== formatedTime.str) {
+                this.pastTime = formatedTime.str;
+                observer.next(formatedTime);
+            }
+
+        }, 500)
+
+    };
+
+    time = new Observable(this.timeObserver);
 
     start() {
         if (this.activeLap) {
@@ -42,7 +58,7 @@ export class Stopwatch {
     }
 
     get formated() {
-        const unix_sec: number = this.unix / 1000;
+        const unix_sec: number = Math.floor(this.unix / 1000);
         const hours: number = Math.floor(unix_sec / 3600);
         const minutes: number = Math.floor((unix_sec - (hours * 3600)) / 60);
         const seconds: number = unix_sec - (hours * 3600) - (minutes * 60);
@@ -58,7 +74,8 @@ export class Stopwatch {
         return {
             h: hours_str,
             m: minutes_str,
-            s: seconds_str
+            s: seconds_str,
+            str: hours_str + ':' + minutes_str + ':' + seconds_str
         }
     }
 

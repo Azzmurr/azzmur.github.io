@@ -18,7 +18,7 @@ export class Lap {
     }
 
     startTicking() {
-        if (this._end !== null) {
+        if (this._end === null) {
             this._start = new Date();
         }
 

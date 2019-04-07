@@ -6,7 +6,7 @@ export class StopwatchLap {
     activeLap: Lap;
 
     start() {
-        if (!this.activeLap.isEnded()) {
+        if (this.activeLap && this.activeLap.isEnded()) {
             this.stop();
         }
 
@@ -28,7 +28,7 @@ export class StopwatchLap {
     }
 
     get formated(): string {
-        const unix_sec: number = this.unix / 1000;
+        const unix_sec: number = Math.floor(this.unix / 1000);
         const hours: number = Math.floor(unix_sec / 3600);
         const minutes: number = Math.floor((unix_sec - (hours * 3600)) / 60);
         const seconds: number = unix_sec - (hours * 3600) - (minutes * 60);
