@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Stopwatch } from '../stopwatch';
+import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
 
 
 @Component({

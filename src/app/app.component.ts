@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Stopwatch } from './stopwatch';
+import { Stopwatch } from './classes/stopwatch/stopwatch';
 
 @Component({
   selector: 'tt-root',

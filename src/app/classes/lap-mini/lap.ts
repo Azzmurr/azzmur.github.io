@@ -1,4 +1,7 @@
-export class Lap {
+import { ILap } from 'src/app/interfaces/lap';
+
+export class Lap implements ILap {
+    id: number = +new Date();
     _start: Date | null = null;
     _end: Date | null = null;
 
@@ -17,7 +20,7 @@ export class Lap {
         return this._end !== null
     }
 
-    startTicking() {
+    start(): LapMini {
         if (this._end === null) {
             this._start = new Date();
         }
@@ -25,8 +28,9 @@ export class Lap {
         return this;
     }
 
-    stopTicking() {
+    stop(): LapMini {
         this._end = new Date();
-    
+        
+        return this;
     }
 }
