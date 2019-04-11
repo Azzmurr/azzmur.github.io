@@ -7,7 +7,5 @@ import { Stopwatch } from './classes/stopwatch/stopwatch';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  stopwatch: Stopwatch = new Stopwatch();
-
-
+  
 }

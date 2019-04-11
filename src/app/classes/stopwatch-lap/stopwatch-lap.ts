@@ -7,7 +7,7 @@ export class StopwatchLap implements ILap {
     activeLap: Lap;
 
     start() {
-        if (this.activeLap && this.activeLap.isEnded()) {
+        if (this.activeLap && !this.activeLap.isEnded()) {
             this.stop();
         }
 
@@ -20,7 +20,10 @@ export class StopwatchLap implements ILap {
     }
 
     stop() {
-        this.activeLap.stop();
+        if (this.activeLap) {
+            this.activeLap.stop();
+            this.activeLap = null;
+        }
 
     }
 

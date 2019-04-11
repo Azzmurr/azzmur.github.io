@@ -20,7 +20,7 @@ export class Lap implements ILap {
         return this._end !== null
     }
 
-    start(): LapMini {
+    start(): Lap {
         if (this._end === null) {
             this._start = new Date();
         }
@@ -28,7 +28,7 @@ export class Lap implements ILap {
         return this;
     }
 
-    stop(): LapMini {
+    stop(): Lap {
         this._end = new Date();
         
         return this;

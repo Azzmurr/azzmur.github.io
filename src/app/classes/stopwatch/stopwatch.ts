@@ -6,25 +6,6 @@ export class Stopwatch {
     laps: StopwatchLap[] = [];
     activeLap: StopwatchLap;
 
-    private pastTime: string;
-    private timeObserver = observer => {
-        const interval = setInterval(() => {
-            const formatedTime: IFormatedTime = this.formated;
-            if (this.pastTime !== formatedTime.str) {
-                this.pastTime = formatedTime.str;
-                observer.next(formatedTime);
-            }
-
-        }, 500)
-
-        return () => {
-            clearInterval(interval);
-        }
-
-    };
-
-    time = new Observable(this.timeObserver);
-
     start() {
         if (this.activeLap) {
             this.activeLap.start();

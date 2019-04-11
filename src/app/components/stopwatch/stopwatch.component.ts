@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
+import { Component, OnInit } from '@angular/core';
+import { stopwatcService } from 'src/app/services/stopwatch/stopwatch';
+import { IFormatedTime } from 'src/app/interfaces/formated-time';
 
 
 @Component({
@@ -8,23 +9,24 @@ import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
   styleUrls: ['./stopwatch.component.scss']
 })
 export class StopwatchComponent implements OnInit {
+  stopwatcService = stopwatcService;
 
-  @Input() stopwatch: Stopwatch;
-
-  hours: string;
-  minutes: string;
-  seconds: string;
+  hours: string = "00";
+  minutes: string = "00";
+  seconds: string = "00";
 
   constructor() { }
 
   ngOnInit() {
-    this.stopwatch.time.subscribe(time => {
-      this.hours = time.h;
-      this.minutes = time.m;
-      this.seconds = time.s;
+    this.stopwatcService.time().subscribe({
+      next: (time) => {
+        this.hours = time.stopwatchTime.h;
+        this.minutes = time.stopwatchTime.m;
+        this.seconds = time.stopwatchTime.s;
+      }
     });
 
-    this.stopwatch.start();
+    this.stopwatcService.start();
 
   }
 
