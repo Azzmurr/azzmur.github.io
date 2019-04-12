@@ -34,11 +34,11 @@ export class StopwatchLap implements ILap {
 
     formatedTime(): string {
         const unix_sec: number = Math.floor(this.unixTime() / 1000);
-        const hours: number = Math.floor(unix_sec / 3600);
-        const minutes: number = Math.floor((unix_sec - (hours * 3600)) / 60);
-        const seconds: number = unix_sec - (hours * 3600) - (minutes * 60);
+        const hours:    number = Math.floor(unix_sec / 3600);
+        const minutes:  number = Math.floor((unix_sec - (hours * 3600)) / 60);
+        const seconds:  number = unix_sec - (hours * 3600) - (minutes * 60);
 
-        let hours_str: string = hours + "";
+        let hours_str:   string = hours + "";
         let minutes_str: string = minutes + "";
         let seconds_str: string = seconds + "";
 

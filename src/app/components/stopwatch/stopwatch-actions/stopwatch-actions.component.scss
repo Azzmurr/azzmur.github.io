@@ -1,0 +1,11 @@
+.stopwatch-actions {
+  padding: 0;
+
+  &-wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+  &-button {
+    flex: 1
+  }
+}

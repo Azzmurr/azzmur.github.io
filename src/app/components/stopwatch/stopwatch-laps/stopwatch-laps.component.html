@@ -1,5 +1,7 @@
-<mat-card *ngFor="let lap of stopwatch.laps">
+<mat-card class="stopwatch-lap" *ngFor="let lap of stopwatch.laps">
   <mat-card-content>
-    {{ lap.formatedTime() }}
+    {{ lap.formated }}
   </mat-card-content>
 </mat-card>
+
+<span *ngIf="!stopwatch.laps.length" class="stopwatch-hint">Here will be your tracker history</span>

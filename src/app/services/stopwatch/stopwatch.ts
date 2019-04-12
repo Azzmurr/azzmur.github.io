@@ -21,6 +21,7 @@ export class StopwatchService {
             let activeLapTime = this.stopwatch.activeLap && this.stopwatch.activeLap.formatedTime();
 
            if (this.stopwatchTime !== stopwatchTime.str && this.activeLapTime !== activeLapTime) {
+               console.log(stopwatchTime.str, activeLapTime);
             this.stopwatchTime = stopwatchTime.str;
             this.activeLapTime = activeLapTime;
             this.timeObservable.next({
@@ -33,7 +34,7 @@ export class StopwatchService {
 
     };
 
-    private timeObservable = new ReplaySubject(1);
+    private timeObservable = new ReplaySubject(5);
     private activeLapObservable = new Observable(this.activeLapObserverFunc);
 
     

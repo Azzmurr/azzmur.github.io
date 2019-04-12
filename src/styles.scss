@@ -29,9 +29,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
+body, .mat-card {
     line-height: 1;
-    font-family: Cabin;
+    font-family: Lato;
 }
 ol, ul {
 	list-style: none;
@@ -51,4 +51,8 @@ table {
 
 body {
 	background: #e7eaed;
+}
+
+.mat-card-content {
+	font-size: 1em;
 }

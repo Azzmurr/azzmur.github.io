@@ -12,10 +12,9 @@ export class Lap implements ILap {
         if (this._finalTime) return this._finalTime;
         
         const now: number = +new Date();
-        const end: number = +( this._end || now );
         const start: number = +( this._start || now );
 
-        return end - start;
+        return now - start;
     }
 
     isEnded(): boolean {
@@ -23,7 +22,7 @@ export class Lap implements ILap {
     }
 
     start(): Lap {
-        if (this._end === null) {
+        if (!this.isEnded()) {
             this._start = new Date();
         }
 
