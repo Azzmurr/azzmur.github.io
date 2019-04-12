@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StopwatchService, StopwatchServiceSingelton } from 'src/app/services/stopwatch/stopwatch';
 import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
 
 @Component({
@@ -9,7 +8,6 @@ import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
 })
 export class StopwatchComponent implements OnInit {
   stopwatch: Stopwatch = new Stopwatch();
-  stopwatchService: StopwatchService = StopwatchServiceSingelton.getInstanse(this.stopwatch);
 
   hours: string = "00";
   minutes: string = "00";
@@ -18,11 +16,11 @@ export class StopwatchComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.stopwatchService.time().subscribe({
+    this.stopwatch.time().subscribe({
       next: time => { 
-        this.hours = time.stopwatchTime.h;
-        this.minutes = time.stopwatchTime.m;
-        this.seconds = time.stopwatchTime.s;
+        this.hours = time.h;
+        this.minutes = time.m;
+        this.seconds = time.s;
 
        }
     });

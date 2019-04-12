@@ -1,8 +1,8 @@
 <mat-card class="stopwatch-actions">
   <mat-card-content class="stopwatch-actions-wrapper">
-    <button *ngIf="inProggres" class="stopwatch-actions-button" mat-button (click)="stop()">Stop</button>
-    <button *ngIf="!inProggres" class="stopwatch-actions-button" mat-button (click)="start()">Start</button>
-    <button *ngIf="inProggres" class="stopwatch-actions-button" mat-button (click)="stopwatch.newLap()">Lap</button>
-    <button *ngIf="stopwatch.laps.length" class="stopwatch-actions-button" mat-button (click)="reset()">Reset</button>
+    <button *ngIf="inProggres" class="stopwatch-actions-button" mat-button (click)="stop()" color="accent">Stop</button>
+    <button *ngIf="!inProggres" class="stopwatch-actions-button" mat-button (click)="start()" color="primary">Start</button>
+    <button *ngIf="inProggres" class="stopwatch-actions-button" mat-button (click)="stopwatch.newLap()" color="primary">Lap</button>
+    <button *ngIf="stopwatch.laps.length" class="stopwatch-actions-button" mat-button (click)="reset()" color="warn">Reset</button>
   </mat-card-content>
 </mat-card>

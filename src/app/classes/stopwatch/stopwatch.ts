@@ -1,5 +1,6 @@
 import { StopwatchLap } from '../stopwatch-lap/stopwatch-lap';
 import { IFormatedTime } from 'src/app/interfaces/formated-time';
+import { Observable } from 'rxjs';
 
 export class Stopwatch {
     id: number = +new Date();
@@ -46,18 +47,14 @@ export class Stopwatch {
     }
 
     formatedTime(): IFormatedTime {
-        const unix_sec: number = Math.floor(this.unixTime() / 1000);
+        const unix_sec: number = this.unixTime();
         const hours: number = Math.floor(unix_sec / 3600);
         const minutes: number = Math.floor((unix_sec - (hours * 3600)) / 60);
         const seconds: number = unix_sec - (hours * 3600) - (minutes * 60);
 
-        let hours_str: string = hours + "";
-        let minutes_str: string = minutes + "";
-        let seconds_str: string = seconds + "";
-
-        if (hours   < 10) {hours_str   = "0" + hours;}
-        if (minutes < 10) {minutes_str = "0" + minutes;}
-        if (seconds < 10) {seconds_str = "0" + seconds;}
+        let hours_str:   string = (hours < 10 ? "0" : "") + hours;
+        let minutes_str: string = (minutes < 10 ? "0" : "") + minutes + "";
+        let seconds_str: string = (seconds < 10 ? "0" : "") + seconds + "";
 
         return {
             h: hours_str,
@@ -65,6 +62,26 @@ export class Stopwatch {
             s: seconds_str,
             str: hours_str + ':' + minutes_str + ':' + seconds_str
         }
+    }
+
+    private oldFormatedTime: string;
+    private timeObserverFunc = observer => {
+        const interval = setInterval(() => {
+            const stopwatchTime = this.formatedTime();
+
+           if (this.oldFormatedTime !== stopwatchTime.str) {
+            this.oldFormatedTime = stopwatchTime.str;
+            observer.next(stopwatchTime);
+           }
+
+        }, 200)
+
+    };
+
+    private timeObservable = new Observable(this.timeObserverFunc);
+
+    time() {
+        return this.timeObservable;
     }
 
 }

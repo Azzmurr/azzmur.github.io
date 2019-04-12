@@ -11,8 +11,8 @@ export class Lap implements ILap {
     unixTime(): number {
         if (this._finalTime) return this._finalTime;
         
-        const now: number = +new Date();
-        const start: number = +( this._start || now );
+        const now: number = Math.floor(+new Date() / 1000);
+        const start: number = Math.floor(+( this._start || now ) / 1000);
 
         return now - start;
     }
