@@ -17,7 +17,7 @@ export class StopwatchComponent implements OnInit {
 
   ngOnInit() {
     this.stopwatch.time().subscribe({
-      next: time => { 
+      next: (time: {h: string, m: string, s: string}) => { 
         this.hours = time.h;
         this.minutes = time.m;
         this.seconds = time.s;
