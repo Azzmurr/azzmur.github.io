@@ -1,0 +1,31 @@
+.stopwatch {
+  width: 800px;
+  margin: auto;
+
+
+
+  &-card {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 16vh;
+  }
+
+  &-time {
+    font-size: 1em;
+
+    &__half {
+      font-size: 0.5em;
+    }
+  }
+}
+
+@media (min-width:801px)  { 
+  
+ }
+
+ 
+@media only screen and (max-width: 801px) {
+  .stopwatch {
+    width: 100%;
+  }
+}

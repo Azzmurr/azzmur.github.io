@@ -1,0 +1,13 @@
+
+<div class="stopwatch">
+    <mat-card class="stopwatch-card">
+        <mat-card-content> 
+          <span class="stopwatch-time"> {{ hours }} </span>
+          <span class="stopwatch-time"> {{ minutes }} </span>
+          <span class="stopwatch-time stopwatch-time__half"> {{ seconds }} </span>
+         </mat-card-content>
+      </mat-card>
+      
+      <tt-stopwatch-actions [stopwatch]="stopwatch"></tt-stopwatch-actions>
+      <tt-stopwatch-laps [stopwatch]="stopwatch"></tt-stopwatch-laps>
+</div>
