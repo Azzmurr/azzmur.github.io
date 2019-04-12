@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActionsComponent } from './actions.component';
+import { StopwatchActionsComponent } from './stopwatch-actions.component';
 
-describe('ActionsComponent', () => {
-  let component: ActionsComponent;
-  let fixture: ComponentFixture<ActionsComponent>;
+describe('StopwatchActionsComponent', () => {
+  let component: StopwatchActionsComponent;
+  let fixture: ComponentFixture<StopwatchActionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActionsComponent ]
+      declarations: [ StopwatchActionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActionsComponent);
+    fixture = TestBed.createComponent(StopwatchActionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

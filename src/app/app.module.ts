@@ -5,16 +5,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MatCardModule } from '@angular/material/card';
 import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
-import { ActionsComponent } from './components/actions/actions.component';
 import { MatButtonModule } from '@angular/material/button';
-import { StopwatchLapsComponent } from './components/stopwatch-laps/stopwatch-laps.component';
+import { StopwatchActionsComponent } from './components/stopwatch/stopwatch-actions/stopwatch-actions.component';
+import { StopwatchLapsComponent } from './components/stopwatch/stopwatch-laps/stopwatch-laps.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StopwatchComponent,
-    ActionsComponent,
-    StopwatchLapsComponent
+    StopwatchActionsComponent,
+    StopwatchLapsComponent,
+    StopwatchActionsComponent
   ],
   imports: [
     BrowserModule,

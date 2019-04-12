@@ -4,20 +4,22 @@ export class Lap implements ILap {
     id: number = +new Date();
     _start: Date | null = null;
     _end: Date | null = null;
+    _finalTime: number | null = null;
 
     constructor() {}
 
-    get unix(): number {
+    unixTime(): number {
+        if (this._finalTime) return this._finalTime;
+        
         const now: number = +new Date();
         const end: number = +( this._end || now );
         const start: number = +( this._start || now );
 
         return end - start;
-
     }
 
     isEnded(): boolean {
-        return this._end !== null
+        return this._end !== null;
     }
 
     start(): Lap {
@@ -30,6 +32,7 @@ export class Lap implements ILap {
 
     stop(): Lap {
         this._end = new Date();
+        this._finalTime = this.unixTime();
         
         return this;
     }

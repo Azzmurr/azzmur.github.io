@@ -1,12 +1,12 @@
 import { StopwatchLap } from '../stopwatch-lap/stopwatch-lap';
-import { Observable } from 'rxjs';
 import { IFormatedTime } from 'src/app/interfaces/formated-time';
 
 export class Stopwatch {
+    id: number = +new Date();
     laps: StopwatchLap[] = [];
     activeLap: StopwatchLap;
 
-    start() {
+    start(): StopwatchLap {
         if (this.activeLap) {
             this.activeLap.start();
 
@@ -15,6 +15,8 @@ export class Stopwatch {
             this.activeLap = lap;
             this.laps.push(lap);
         }
+
+        return this.activeLap;
     }
 
     stop() {
@@ -30,7 +32,7 @@ export class Stopwatch {
 
         }
 
-        this.start();
+        return this.start();
     }
 
     reset() {
@@ -39,12 +41,12 @@ export class Stopwatch {
 
     }
 
-    get unix(): number {
-        return this.laps.reduce( (actual, lap) => actual + lap.unix, 0);
+    unixTime(): number {
+        return this.laps.reduce( (actual, lap) => actual + lap.unixTime(), 0);
     }
 
-    get formated(): IFormatedTime {
-        const unix_sec: number = Math.floor(this.unix / 1000);
+    formatedTime(): IFormatedTime {
+        const unix_sec: number = Math.floor(this.unixTime() / 1000);
         const hours: number = Math.floor(unix_sec / 3600);
         const minutes: number = Math.floor((unix_sec - (hours * 3600)) / 60);
         const seconds: number = unix_sec - (hours * 3600) - (minutes * 60);

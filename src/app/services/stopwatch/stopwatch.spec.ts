@@ -1,7 +1,7 @@
-import { stopwatcService } from './stopwatch';
+import { stopwatchService } from './stopwatch';
 
 describe('StopwatchActions', () => {
   it('should create an instance', () => {
-    expect(stopwatcService).toBeTruthy();
+    expect(stopwatchService).toBeTruthy();
   });
 });

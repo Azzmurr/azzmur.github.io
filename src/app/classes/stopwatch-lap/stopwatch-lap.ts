@@ -1,10 +1,11 @@
-import { Lap } from '../lap-mini/lap';
+import { Lap } from '../lap/lap';
 import { ILap } from 'src/app/interfaces/lap';
 
 export class StopwatchLap implements ILap {
     id: number = +new Date();
     laps: Lap[] = [];
     activeLap: Lap;
+    formated: string = "00:00:00";
 
     start() {
         if (this.activeLap && !this.activeLap.isEnded()) {
@@ -27,12 +28,12 @@ export class StopwatchLap implements ILap {
 
     }
 
-    get unix(): number {
-        return this.laps.reduce( (actual, lap) => actual + lap.unix, 0);
+    unixTime(): number {
+        return this.laps.reduce( (actual, lap) => actual + lap.unixTime(), 0);
     }
 
-    get string(): string {
-        const unix_sec: number = Math.floor(this.unix / 1000);
+    formatedTime(): string {
+        const unix_sec: number = Math.floor(this.unixTime() / 1000);
         const hours: number = Math.floor(unix_sec / 3600);
         const minutes: number = Math.floor((unix_sec - (hours * 3600)) / 60);
         const seconds: number = unix_sec - (hours * 3600) - (minutes * 60);

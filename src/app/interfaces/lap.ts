@@ -1,10 +1,10 @@
 export interface ILap {
     id: number;
-    unix: number;
-    string?: string;
+    formated?: string;
     start();
     stop();
 
-
+    unixTime(): number;
+    formatedTime?(): string;
 
 }

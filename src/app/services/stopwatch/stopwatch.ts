@@ -1,35 +1,40 @@
 import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
+let services = {};
 
-class StopwatcService {
-    private stopwatch: Stopwatch = new Stopwatch();
+export class StopwatchService {
+    constructor(stopwatch: Stopwatch) {
+        this.stopwatch = stopwatch
+    }
+
+    private stopwatch: Stopwatch;
     private stopwatchTime: string;
     private activeLapTime: string;
-    private timeObserverFunc = observer => {
+    private activeLapObserver
+    private activeLapObserverFunc = observer => {
+        this.activeLapObserver = observer;
+    }
+    private timeObserverFunc = () => {
         const interval = setInterval(() => {
-            let stopwatchTime = this.stopwatch.formated;
-            let activeLapTime = this.stopwatch.activeLap.string;
+            let stopwatchTime = this.stopwatch.formatedTime();
+            let activeLapTime = this.stopwatch.activeLap && this.stopwatch.activeLap.formatedTime();
 
            if (this.stopwatchTime !== stopwatchTime.str && this.activeLapTime !== activeLapTime) {
             this.stopwatchTime = stopwatchTime.str;
             this.activeLapTime = activeLapTime;
-            observer.next({
+            this.timeObservable.next({
                 stopwatchTime, 
                 activeLapTime
             });
-
            }
 
-        }, 200)
-
-        return () => {
-            clearInterval(interval);
-        }
+        }, 1000)
 
     };
 
-    private timeObserver = new Observable(this.timeObserverFunc);
+    private timeObservable = new ReplaySubject(1);
+    private activeLapObservable = new Observable(this.activeLapObserverFunc);
 
     
     start() {
@@ -41,21 +46,33 @@ class StopwatcService {
 
     };
     lap() {
-        this.stopwatch.newLap();
+       const lap = this.stopwatch.newLap()
+       this.activeLapObserver.next(lap);
 
-    };
-    formated() {
-        return this.stopwatch.formated;
     };
 
     time() {
-        return this.timeObserver;
+        this.timeObserverFunc();
+        return this.timeObservable;
+    }
+
+    activeLap() {
+        return this.activeLapObservable;
     }
 
     getStopwatch() {
         return this.stopwatch;
     }
 
-}
+};
 
-export const stopwatcService: StopwatcService = new StopwatcService();
+export const StopwatchServiceSingelton = {
+   getInstanse(stopwatch: Stopwatch): StopwatchService {
+       if (!services[stopwatch.id]) {
+        services[stopwatch.id] = new StopwatchService(stopwatch);
+
+       }
+
+       return services[stopwatch.id];
+   }
+};
