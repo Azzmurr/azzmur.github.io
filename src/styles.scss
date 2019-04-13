@@ -29,9 +29,11 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body, .mat-card {
+body {
     line-height: 1;
-    font-family: Lato;
+		* {
+			font-family: Lato !important;
+		}
 }
 ol, ul {
 	list-style: none;

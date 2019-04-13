@@ -8,6 +8,9 @@ import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
 import { MatButtonModule } from '@angular/material/button';
 import { StopwatchActionsComponent } from './components/stopwatch/stopwatch-actions/stopwatch-actions.component';
 import { StopwatchLapsComponent } from './components/stopwatch/stopwatch-laps/stopwatch-laps.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { StopwatchLapsComponent } from './components/stopwatch/stopwatch-laps/st
     BrowserModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

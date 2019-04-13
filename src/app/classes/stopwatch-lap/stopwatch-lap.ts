@@ -5,7 +5,7 @@ export class StopwatchLap implements ILap {
     id: number = +new Date();
     laps: Lap[] = [];
     activeLap: Lap;
-    formated: string = "00:00:00";
+    comment: string;
 
     start() {
         if (this.activeLap && !this.activeLap.isEnded()) {
@@ -43,6 +43,10 @@ export class StopwatchLap implements ILap {
         let seconds_str: string = (seconds < 10 ? "0" : "") + seconds + "";
 
         return hours_str + ':' + minutes_str + ':' + seconds_str;
+    }
+
+    addComment(comment: string) {
+        this.comment = comment;
     }
     
 }

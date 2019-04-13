@@ -5,39 +5,50 @@ import { Observable } from 'rxjs';
 export class Stopwatch {
     id: number = +new Date();
     laps: StopwatchLap[] = [];
+    lapsMap = {};
     activeLap: StopwatchLap;
 
-    start(): StopwatchLap {
+    start(): Stopwatch {
         if (this.activeLap) {
             this.activeLap.start();
 
         } else {
             const lap = new StopwatchLap().start();
+            this.lapsMap[lap.id] = lap;
             this.activeLap = lap;
             this.laps.push(lap);
         }
 
-        return this.activeLap;
+        return this;
     }
 
-    stop() {
+    stop(): Stopwatch {
         if (this.activeLap) {
             this.activeLap.stop();
         }
+        
+        return this;
     }
 
-    newLap() {
+    newLap(): Stopwatch {
        this.stop();
        this.activeLap = null;
 
-       console.log(this.laps);
        return this.start();
     }
 
-    reset() {
+    continiueLap(id: number) {
+        this.stop();
+        if (this.lapsMap[id]) this.activeLap = this.lapsMap[id].start();
+
+        return this;
+
+    }
+
+    reset(): Stopwatch {
         this.laps.length = 0;
         this.activeLap = null;
-
+        return this;
     }
 
     unixTime(): number {

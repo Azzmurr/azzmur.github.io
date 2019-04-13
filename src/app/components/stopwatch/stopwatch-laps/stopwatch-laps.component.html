@@ -1,7 +1,22 @@
-<mat-card class="stopwatch-lap" *ngFor="let lap of stopwatch.laps">
-  <mat-card-content>
-    {{ lap.formatedTime() }}
-  </mat-card-content>
-</mat-card>
+<mat-expansion-panel #stopwatchLap class="stopwatch-lap" *ngFor="let lap of stopwatch.laps" mat-elevation-z1>
+  <mat-expansion-panel-header>
+    <mat-panel-title class="stopwatch-lap-time">
+      {{ lap.formatedTime() }}
+    </mat-panel-title>
+    <mat-panel-description class="stopwatch-lap-comment">
+      {{ lap.comment }}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+
+  <mat-form-field class="stopwatch-lap-comment-input">
+    <input matInput placeholder="Your comment" [(ngModel)]="lap.comment">
+  </mat-form-field>
+
+  <mat-action-row class="stopwatch-lap-actions">
+    <button mat-button color="primary" *ngIf="stopwatch.activeLap.id === lap.id" (click)="startNewLap(stopwatchLap)">Start new track</button>
+    <button mat-button color="primary" *ngIf="stopwatch.activeLap.id !== lap.id" (click)="startThisLap(stopwatchLap, lap)">Continiue this track</button>
+  </mat-action-row>
+</mat-expansion-panel>
 
 <span *ngIf="!stopwatch.laps.length" class="stopwatch-hint">Here will be your tracker history</span>

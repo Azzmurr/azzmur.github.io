@@ -1,5 +1,32 @@
 .stopwatch-lap {
   margin: 10px 0;
+  padding: 0;
+
+  &-time {
+    flex: 0;
+  }
+
+  &-comment {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-actions {
+    padding: 0;
+  }
+
+  &-comment-input {
+    width: 100%;
+  }
 }
 
 .stopwatch-hint {
