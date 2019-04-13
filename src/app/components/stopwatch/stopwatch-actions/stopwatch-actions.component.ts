@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
-import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'tt-stopwatch-actions',

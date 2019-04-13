@@ -27,13 +27,11 @@ export class Stopwatch {
     }
 
     newLap() {
-        if (this.activeLap) {
-            this.activeLap.stop();
-            this.activeLap = null;
+       this.stop();
+       this.activeLap = null;
 
-        }
-
-        return this.start();
+       console.log(this.laps);
+       return this.start();
     }
 
     reset() {
