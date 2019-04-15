@@ -35,4 +35,14 @@ export class Lap implements ILap {
         
         return this;
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            start: this._start,
+            end: this._end,
+            finalTime: this._finalTime
+        };
+    }
 }
+

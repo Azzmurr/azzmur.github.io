@@ -90,7 +90,16 @@ export class Stopwatch {
     private timeObservable = new Observable(this.timeObserverFunc);
 
     time() {
+        console.log(this);
         return this.timeObservable;
+    }
+
+    toJSON() {
+        return {
+            id: this.id,
+            laps: this.laps,
+            activeLapId: this.activeLap && this.activeLap.id
+        }
     }
 
 }

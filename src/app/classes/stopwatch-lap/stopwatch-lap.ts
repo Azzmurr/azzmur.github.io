@@ -45,8 +45,13 @@ export class StopwatchLap implements ILap {
         return hours_str + ':' + minutes_str + ':' + seconds_str;
     }
 
-    addComment(comment: string) {
-        this.comment = comment;
+    toJSON() {
+        return {
+            id: this.id,
+            laps: this.laps,
+            activeLapId: this.activeLap && this.activeLap.id,
+            comment: this.comment
+        };
     }
     
 }
