@@ -1,13 +1,12 @@
 <mat-expansion-panel #stopwatchLap class="stopwatch-lap" *ngFor="let lap of stopwatch.laps" mat-elevation-z1>
   <mat-expansion-panel-header>
-    <mat-panel-title class="stopwatch-lap-time">
+    <mat-panel-title class="stopwatch-lap-time" [ngClass]="{'stopwatch-lap-time__active': stopwatch.activeLap.id === lap.id}">
       {{ lap.formatedTime() }}
     </mat-panel-title>
     <mat-panel-description class="stopwatch-lap-comment">
       {{ lap.comment }}
     </mat-panel-description>
   </mat-expansion-panel-header>
-
 
   <mat-form-field class="stopwatch-lap-comment-input">
     <input matInput placeholder="Your comment" [(ngModel)]="lap.comment">

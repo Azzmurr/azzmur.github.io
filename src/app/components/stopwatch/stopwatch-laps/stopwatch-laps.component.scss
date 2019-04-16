@@ -4,6 +4,9 @@
 
   &-time {
     flex: 0;
+    &__active {
+      color: #f44336;
+    }
   }
 
   &-comment {

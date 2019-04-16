@@ -8,6 +8,7 @@ import { StopwatchActionsComponent } from './components/stopwatch/stopwatch-acti
 import { StopwatchLapsComponent } from './components/stopwatch/stopwatch-laps/stopwatch-laps.component';
 import { FormsModule }   from '@angular/forms';
 import { MaterialModule } from './material/material.module';
+import { StopwatchService } from './services/stopwatch.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { MaterialModule } from './material/material.module';
     FormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [StopwatchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

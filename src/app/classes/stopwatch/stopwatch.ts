@@ -7,6 +7,23 @@ export class Stopwatch {
     laps: StopwatchLap[] = [];
     lapsMap = {};
     activeLap: StopwatchLap;
+    inProgress: boolean = false;
+    time: string = "";
+
+    private timeObserverFunc = observer => {
+        const interval = setInterval(() => {
+            const stopwatchTime = this.formatedTime();
+
+           if (this.time !== stopwatchTime.str) {
+            this.time = stopwatchTime.str;
+            observer.next(stopwatchTime);
+           }
+
+        }, 200)
+
+    };
+
+    time$ = new Observable(this.timeObserverFunc);
 
     start(): Stopwatch {
         if (this.activeLap) {
@@ -16,8 +33,9 @@ export class Stopwatch {
             const lap = new StopwatchLap().start();
             this.lapsMap[lap.id] = lap;
             this.activeLap = lap;
-            this.laps.push(lap);
+            this.laps.unshift(lap);
         }
+        this.inProgress = true;
 
         return this;
     }
@@ -26,6 +44,7 @@ export class Stopwatch {
         if (this.activeLap) {
             this.activeLap.stop();
         }
+        this.inProgress = false;
         
         return this;
     }
@@ -39,15 +58,18 @@ export class Stopwatch {
 
     continiueLap(id: number) {
         this.stop();
-        if (this.lapsMap[id]) this.activeLap = this.lapsMap[id].start();
+        if (this.lapsMap[id]) this.activeLap = this.lapsMap[id];
 
-        return this;
+        return this.start();
 
     }
 
     reset(): Stopwatch {
+        this.stop();
         this.laps.length = 0;
         this.activeLap = null;
+
+        
         return this;
     }
 
@@ -73,26 +95,6 @@ export class Stopwatch {
         }
     }
 
-    private oldFormatedTime: string;
-    private timeObserverFunc = observer => {
-        const interval = setInterval(() => {
-            const stopwatchTime = this.formatedTime();
-
-           if (this.oldFormatedTime !== stopwatchTime.str) {
-            this.oldFormatedTime = stopwatchTime.str;
-            observer.next(stopwatchTime);
-           }
-
-        }, 200)
-
-    };
-
-    private timeObservable = new Observable(this.timeObserverFunc);
-
-    time() {
-        console.log(this);
-        return this.timeObservable;
-    }
 
     toJSON() {
         return {
@@ -100,6 +102,16 @@ export class Stopwatch {
             laps: this.laps,
             activeLapId: this.activeLap && this.activeLap.id
         }
+    }
+
+    restore(configuration: string) {
+        const parcedConfiguration = JSON.parse(configuration);
+        this.id = parcedConfiguration.id;
+        this.laps = parcedConfiguration.laps.map( lap => new StopwatchLap().restore(lap) );
+        this.lapsMap = this.laps.reduce( (laps, lap) => (laps[lap.id] = lap) && laps, {} )
+        this.activeLap = this.lapsMap[parcedConfiguration.activeLapId];     
+        
+        this.inProgress = !!this.activeLap;
     }
 
 }

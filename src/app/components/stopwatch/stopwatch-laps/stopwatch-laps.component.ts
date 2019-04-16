@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { StopwatchLap } from 'src/app/classes/stopwatch-lap/stopwatch-lap';
+import { StopwatchService } from 'src/app/services/stopwatch.service';
 
 @Component({
   selector: 'tt-stopwatch-laps',
@@ -9,9 +10,12 @@ import { StopwatchLap } from 'src/app/classes/stopwatch-lap/stopwatch-lap';
   styleUrls: ['./stopwatch-laps.component.scss']
 })
 export class StopwatchLapsComponent implements OnInit {
-  @Input() stopwatch: Stopwatch;
+  stopwatch: Stopwatch;
 
-  constructor() { }
+  constructor(private stopwatchService: StopwatchService) {
+    this.stopwatch = stopwatchService.stopwatch;
+    
+   }
 
   ngOnInit() {
     

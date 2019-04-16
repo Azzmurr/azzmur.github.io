@@ -44,5 +44,14 @@ export class Lap implements ILap {
             finalTime: this._finalTime
         };
     }
+
+    restore(configuration) {
+        this.id = configuration.id;
+        this._start = configuration.start;
+        this._end = configuration.end;
+        this._finalTime = configuration.finalTime;
+
+        return this;
+    }
 }
 

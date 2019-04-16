@@ -53,5 +53,15 @@ export class StopwatchLap implements ILap {
             comment: this.comment
         };
     }
+
+    restore(configuration) {
+        this.id = configuration.id;
+        this.laps = configuration.laps.map( lap => new Lap().restore(lap) );
+        this.activeLap = this.laps.find( lap => lap.id === configuration.activeLapId );
+        this.comment = configuration.comment;
+
+        return this;
+
+    }
     
 }

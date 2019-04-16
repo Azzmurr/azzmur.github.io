@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
+import { StopwatchService } from 'src/app/services/stopwatch.service';
 
 @Component({
   selector: 'tt-stopwatch-actions',
@@ -7,27 +8,27 @@ import { Stopwatch } from 'src/app/classes/stopwatch/stopwatch';
   styleUrls: ['./stopwatch-actions.component.scss']
 })
 export class StopwatchActionsComponent implements OnInit {
-  @Input() stopwatch: Stopwatch;
+  stopwatch: Stopwatch;
   inProggres: boolean = false;
 
-  constructor() { }
+  constructor(private stopwatchService: StopwatchService) {
+    this.stopwatch = stopwatchService.stopwatch;
+
+   }
 
   ngOnInit() {
   }
 
   start() {
     this.stopwatch.start();
-    this.inProggres = true;
   }
 
   stop() {
     this.stopwatch.stop();
-    this.inProggres = false;
   }
 
   reset() {
     this.stopwatch.reset();
-    this.inProggres = false;
   }
 
 }
